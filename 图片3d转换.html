@@ -3,8 +3,78 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style type="text/css">
+        ul,li{margin: 0;padding: 0;list-style: none;}
+		#container{width: 800px;height: 360px;margin: 100px auto}
+		#container .list{width:860px;height: 360px;perspective: 800px;}
+		#container .list li{width: 50px;height: 360px;position: relative;transform-style: preserve-3d;transform-origin: center center -180px;transition: 2s;float: left;}
+		#container .list li a{width: 100%;height: 100%;position: absolute;}
+	    #container .list li a:nth-of-type(1){background: url(1.jpg) no-repeat;}
+	    #container .list li a:nth-of-type(2){background: url(2.jpg) no-repeat;top: -360px;transform-origin: bottom;transform: rotateX(90deg);}
+        #container .list li a:nth-of-type(3){background: url(3.jpg) no-repeat;transform:translateZ(-360px) rotateX(180deg);}
+        #container .list li a:nth-of-type(4){background: url(4.jpg) no-repeat;top: 360px;transform-origin: top;transform: rotateX(-90deg);}
+        span:nth-of-type(1){width: 360px;height: 360px;background: gray;position: absolute;left: 0;transform-origin: left;transform:rotateY(90deg);}
+        span:nth-of-type(2){width: 360px;height: 360px;background: gray;position: absolute;right: 0;transform-origin: right;transform:rotateY(-90deg);}
+        #container div{position: absolute;top: 600px}
+        button{width: 100px;height: 30px;text-align: center;font-size: 20px;color: #999;border: none;}
+
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			  var oul=document.getElementsByClassName('list')[0]
+			  var oli=oul.getElementsByTagName('li')
+              var imag=50
+              var mag=800
+              var len=mag/imag
+              var Index=0
+			  for(var i=0;i<len;i++){
+			  	 var ali=document.createElement('li')
+			  	 i>=len/2?Index--:Index++
+			  	 ali.innerHTML=	'<a href="#"></a><a href="#"></a><a href="#"></a><a href="#"></a><span></span><span></span>'
+			     oul.appendChild(ali)
+			  	 var oa=ali.getElementsByTagName('a')
+			  	 oa[0].style.backgroundPosition=-i*50+'px'
+			  	 oa[1].style.backgroundPosition=-i*50+'px'
+			  	 oa[2].style.backgroundPosition=-i*50+'px'
+			  	 oa[3].style.backgroundPosition=-i*50+'px'
+
+			  	 ali.style.zIndex=Index
+                
+
+			  }
+			  var num=0
+			  var btn=document.getElementsByTagName('button')
+			  for(var i=0;i<btn.length;i++){
+			  	  btn[i].index=i
+				  btn[i].onclick=function(){				  	 
+				  	 for(var i=0;i<=len;i++){
+				  	 	oli[i].style.transition='1s '+50*i+'ms'
+				  	 	oli[i].style.transform='rotateX('+90*(this.index)+'deg)'
+				  	 }
+				  }						  	
+			  }		  
+		}
+	</script>
 </head>
 <body>
-	<div></div>
+	<div id="container">
+		<ul class="list">
+			<li>
+				<a href="#"></a>
+				<a href="#"></a>
+				<a href="#"></a>
+				<a href="#"></a>
+				<span></span>
+				<span></span>
+			</li>
+		</ul>
+		<div>
+			<button>1</button>
+			<button>2</button>
+			<button>3</button>
+			<button>4</button>
+		</div>
+	</div>
+
 </body>
 </html>
